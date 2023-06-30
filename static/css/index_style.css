@@ -1,0 +1,18 @@
+#carruselindex1 .carousel-item {
+  height: 70vh;
+  background: #777;
+}
+
+#carruselindex1 .carousel-item img {  
+  object-fit: contain;
+  object-position: center;
+  overflow: hidden;
+  height:70vh;
+}
+
+#destacadoColumna {
+  object-fit: scale-down;
+  object-position: center;
+  overflow: hidden;
+  height:70vh;
+}

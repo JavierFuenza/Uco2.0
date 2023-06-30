@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ÜcÖ</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/static/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/index_style.css">
+  <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
-        <img src="fotos/logos/ÜcÖ-horizontal-real.png" width="70" height="30" alt="ÜcÖ">
+        <img src="{% static 'fotos/logos/ÜcÖ-horizontal-real.png' %}" width="70" height="30" alt="ÜcÖ">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,15 +93,15 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <a href="/pantalones"><img src="fotos/pantalon2/pantalon2_2.webp" class="d-block w-100" alt="..."></a>
+        <a href="/pantalones"><img src="{% static 'fotos/pantalon2/pantalon2_2.webp' %}" class="d-block w-100" alt="..."></a>
         <h4>Pantalones</h4>
       </div>
       <div class="carousel-item">
-        <a href="/poleras"><img src="fotos/polera 1/Polera1_1.png" class="d-block w-100" alt="..."></a>
+        <a href="/poleras"><img src="{% static 'fotos/polera 1/Polera1_1.png' %}" class="d-block w-100" alt="..."></a>
         <h4>Poleras</h4>
       </div>
       <div class="carousel-item">
-        <a href="/polerones"><img src="fotos/poleron1.jpg" class="d-block w-100" alt="..."></a>
+        <a href="/polerones"><img src="{% static 'fotos/poleron1.jpg' %}" class="d-block w-100" alt="..."></a>
         <h4>Polerones</h4>
       </div>
     </div>
@@ -124,7 +125,7 @@
       <div class="col" id="destacadoColumna">
         <div class="card">
           <div class="card-body">
-            <a href="/poleras"><img src="fotos/pantalon4/pantalon4_2.webp" alt="polera"></a>
+            <a href="/poleras"><img src="{% static ' fotos/pantalon4/pantalon4_2.webp' %}" alt="polera"></a>
           </div>
         </div>
       </div>
@@ -132,14 +133,14 @@
       <div class="col" id="destacadoColumna">
         <div class="card">
           <div class="card-body">
-            <a href="/poleras"><img src="fotos\polera 2\Polera2_1.avif" alt="polera"></a>
+            <a href="/poleras"><img src="{% static ' fotos\polera 2\Polera2_1.avif' %}" alt="polera"></a>
           </div>
         </div>
       </div>
       <div class="col" id="destacadoColumna">
         <div class="card">
           <div class="card-body">
-            <a href="/poleras"><img src="fotos/poleraBobEsponja.webp" alt="polera"></a>
+            <a href="/poleras"><img src="{% static ' fotos/poleraBobEsponja.webp' %}" alt="polera"></a>
           </div>
         </div>
       </div>
