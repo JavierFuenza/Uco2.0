@@ -16,7 +16,7 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="Index.html">
+            <a class="navbar-brand" href="/">
                 <img src="fotos/logos/ÜcÖ-horizontal-real.png" width="70" height="30" alt="ÜcÖ">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Index.html">Inicio</a>
+                        <a class="nav-link active" aria-current="page" href="/">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Nosotros.html">Nosotros</a>
@@ -50,91 +50,50 @@
                         </ul>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalLogIn">
-                    Iniciar sesion
-                </button>
             </div>
         </div>
     </nav>
-    <!-- Modal -->
-    <div class="modal fade" id="modalLogIn" tabindex="-1" aria-labelledby="logIn" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="logIn">Iniciar Sesion</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="emailUsuario">Email</label>
-                            <input type="email" class="form-control" id="emailUsuario" name="emailUsuario"
-                                placeholder="Ingrese Email" required>
-                            <label for="contraUsuario">Contraseña</label>
-                            <input type="password" class="form-control" id="contraUsuario" name="contraUsuario"
-                                placeholder="Ingrese contraseña" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-link" href="/registro">Crear Cuenta</a>
-                    <button type="button" class="btn btn-dark">Ingresar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="container">
-        <form id="formulario">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message:</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>
+        {% endfor %}
+    
+        <h3>Create your account!</h3>
+        <form method="post" action="/registro">
+            {% csrf_token %}
             <div class="form-group">
-                <label for="nombreUsuario">Nombre</label>
-                <input type="text" class="form-control" id="nombreUsuario" name="nombre" placeholder="Ingrese nombre"
-                    required>
-                <br>
-                <label for="apellidoUsuario">Apellido</label>
-                <input type="text" class="form-control" id="apellidoUsuario" name="apellido"
-                    placeholder="Ingrese apellido" required>
-                <br>
-                <label for="fecnacUsuario">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="fecnacUsuario" name="fecnac" placeholder="" required>
-                <br>
-                <label>Genero</label>
-                <br>
-                <select id="genero" required>
-                    <option value="1">Masculino</option>
-                    <option value="2">Femenino</option>
-                    <option value="3">Otro</option>
-                </select>
-                <br>
-                <br>
-                <label for="emailUsuario">Email</label>
-                <input type="email" class="form-control" id="emailUsuario" name="email" placeholder="xxxxxxx@xxxx.xx"
-                    required>
-                <br>
-                <label for="telefonoUsuario">Telefono</label>
-                <input type="tel" class="form-control" id="telefonoUsuario" name="telefono" placeholder="9xxxxxxxx"
-                    pattern="[9]{1}[0-9]{8}" required>
-                <br>
-                <label for="direccionUsuario">Direccion</label>
-                <input type="text" class="form-control" id="direccionUsuario" name="direccion"
-                    placeholder="Ingrese su Direccion" required>
-                <br>
-                <label for="cboRegiones">Region</label>
-                <select name="cboRegiones" id="cboRegiones" class="form-select mb-3 col-md-4" required>
-                    <option value="" disable hidden>Seleccione una opcion</option>
-                </select>
-                <label for="cboProvincias">Provincias</label>
-                <select name="cboProvincias" id="cboProvincias" class="form-select mb-3 col-md-4" disabled required>
-                    <option value="" disable hidden>Seleccione una opcion</option>
-                </select>
-                <label for="cboComunas">Comunas</label>
-                <select name="cboComunas" id="cboComunas" class="form-select mb-3 col-md-4" disabled required>
-                    <option value="" disable hidden>Seleccione una opcion</option>
-                </select>
-                <button type="submit">Enviar</button>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Create A Username (use only letters and numbers)" Required>
             </div>
+            <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" Required>
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" Required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address" Required>
+            </div>
+            <div class="form-group">
+                <label for="pass1">Password</label>
+                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Create Your Password" Required>
+            </div>
+            <div class="form-group">
+                <label for="pass2">Confirm Password</label>
+                <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Your Password" Required>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
     </div>
-    <script src="{% static 'js/scriptRegistro.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
         crossorigin="anonymous"></script>
