@@ -40,22 +40,22 @@ def registro(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         if User.objects.filter(username=username):
-            messages.error(request, "Username already exist! Please try some other username.")
+            messages.error(request, "Usuario ya existe")
             return redirect('registro')
         if User.objects.filter(email=email).exists():
-            messages.error(request, "Email Already Registered!!")
+            messages.error(request, "Correo ya existe")
             return redirect('registro')
         
         if len(username)>20:
-            messages.error(request, "Username must be under 20 charcters!!")
+            messages.error(request, "Usuario no puede tener mas de 20 acaracteres")
             return redirect('registro')
         
         if pass1 != pass2:
-            messages.error(request, "Passwords didn't matched!!")
+            messages.error(request, "Las contraseñas no coinciden")
             return redirect('registro')
         
         if not username.isalnum():
-            messages.error(request, "Username must be Alpha-Numeric!!")
+            messages.error(request, "Usuario debe ser alphanumerico")
             return redirect('/')
         
         myuser = User.objects.create_user(username, email, pass1)
@@ -63,7 +63,7 @@ def registro(request):
         myuser.last_name = lname
         myuser.is_active = False
         myuser.save()
-        messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
+        messages.success(request, "Su cuenta ha sido creada con exito, porfavor revise su correo para verificar su cuenta")
        
         # Welcome Email
         subject = "Bienvenido a UcO"
@@ -74,7 +74,7 @@ def registro(request):
         
         # Email Address Confirmation Email
         current_site = get_current_site(request)
-        email_subject = "Confirm your Email @ GFG - Django Login!!"
+        email_subject = "Confirmacion de Email UcO"
         message2 = render_to_string('email_confirmation.html',{
             
             'name': myuser.first_name,
