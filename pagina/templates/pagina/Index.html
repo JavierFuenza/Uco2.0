@@ -30,22 +30,8 @@
           <li class="nav-item">
             <a class="nav-link" href="/nosotros">Nosotros</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="Ropa.html" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Ropa
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/poleras">Poleras</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="/polerones">Polerones</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="/pantalones">Pantalones</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/ropa">Ropa</a>
           </li>
         </ul>
         {% if user.is_authenticated %}
@@ -108,16 +94,16 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <a href="/pantalones"><img src="{% static 'fotos/pantalon2/pantalon2_2.webp' %}" class="d-block w-100"
+        <a href="/ropa"><img src="{% static 'fotos/pantalon2/pantalon2_2.webp' %}" class="d-block w-100"
             alt="..."></a>
         <h4>Pantalones</h4>
       </div>
       <div class="carousel-item">
-        <a href="/poleras"><img src="{% static 'fotos/polera 1/Polera1_1.png' %}" class="d-block w-100" alt="..."></a>
+        <a href="/ropa"><img src="{% static 'fotos/polera 1/Polera1_1.png' %}" class="d-block w-100" alt="..."></a>
         <h4>Poleras</h4>
       </div>
       <div class="carousel-item">
-        <a href="/polerones"><img src="{% static 'fotos/poleron1.jpg' %}" class="d-block w-100" alt="..."></a>
+        <a href="/ropa"><img src="{% static 'fotos/poleron1.jpg' %}" class="d-block w-100" alt="..."></a>
         <h4>Polerones</h4>
       </div>
     </div>
@@ -135,33 +121,17 @@
   <div class="container">
     <h1>Nuestros productos destacados</h1>
   </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col" id="destacadoColumna">
-        <div class="card">
-          <div class="card-body">
-            <a href="/poleras"><img src="{% static ' fotos/pantalon4/pantalon4_2.webp' %}" alt="polera"></a>
-          </div>
-        </div>
-      </div>
-      <!--Cards-->
-      <div class="col" id="destacadoColumna">
-        <div class="card">
-          <div class="card-body">
-            <a href="/poleras"><img src="{% static ' fotos\polera 2\Polera2_1.avif' %}" alt="polera"></a>
-          </div>
-        </div>
-      </div>
-      <div class="col" id="destacadoColumna">
-        <div class="card">
-          <div class="card-body">
-            <a href="/poleras"><img src="{% static ' fotos/poleraBobEsponja.webp' %}" alt="polera"></a>
-          </div>
-        </div>
-      </div>
+
+  {% for producto in productos|slice:":3" %}
+  <div class="card" style="width: 18rem;">
+    <img src="{{ producto.imagen.imagen.url }}" class="card-img-top" alt="Imagen del producto">
+    <div class="card-body">
+      <h5 class="card-title">{{ producto.nombre }}</h5>
+      <p class="card-text">Precio: {{ producto.precio }}</p>
+      <button type="button" class="btn btn-dark" marcador="{{ producto.id}}">Añadir al carro</button>
     </div>
   </div>
+  {% endfor %}
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
     integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"

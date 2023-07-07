@@ -1,3 +1,4 @@
+import os
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -10,10 +11,39 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth import authenticate, login, logout
 from . tokens import generate_token
+from .models import imagen, producto
+from django.http import JsonResponse
 
 # Create your views here.
+productos = producto.objects.all()
+        
+def obtener_datos_modelo(request):
+    datos_producto = producto.objects.all().values('id', 'nombre', 'precio', 'idCategoria', 'imagen_id')  # Obtén los datos del modelo producto
+
+    data_con_url = []
+    for item_producto in datos_producto:
+        imagen_id = item_producto['imagen_id']  # Obtiene el ID de la imagen relacionada en el modelo producto
+        item_con_url = item_producto.copy()  # Copia el diccionario del modelo producto
+
+        if imagen_id:
+            try:
+                img = imagen.objects.get(nombre=imagen_id)  # Obtiene el objeto imagen utilizando el campo nombre
+                imagen_nombre = 'pics/' + img.nombre +'.png' # Obtiene el nombre de la imagen
+                imagen_url = os.path.join(settings.MEDIA_URL, imagen_nombre)  # Construye la URL de la imagen
+                item_con_url['imagen'] = imagen_url  # Asigna la URL de la imagen al campo "imagen"
+            except imagen.DoesNotExist:
+                pass
+
+        data_con_url.append(item_con_url)
+
+    return JsonResponse(data_con_url, safe=False)
+
+
 def index(request):
-    context={}
+    data = imagen.objects.all()
+    context={
+        'data' : data
+    }
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
@@ -112,7 +142,9 @@ def nosotros(request):
             messages.error(request, "nombre de usuario o contraseña erronea")
     return render(request, 'pagina/Nosotros.html', context)
 def pantalones(request):
-    context={}
+    context={
+        
+        }
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
@@ -128,7 +160,9 @@ def pantalones(request):
             messages.error(request, "nombre de usuario o contraseña erronea")
     return render(request, 'pagina/pantalones.html', context)
 def poleras(request):
-    context={}
+    context={
+        'productos' : productos
+    }
     if request.method == 'POST':
         username = request.POST['username']
         pass1 = request.POST['pass1']
